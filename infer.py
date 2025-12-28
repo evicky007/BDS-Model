@@ -11,27 +11,37 @@ config = bdh.BDHConfig(
     n_head=2,
 )
 
-# Load model
-model = bdh.BDH(config).to(device)
-model.load_state_dict(torch.load("bdh_weights.pt", map_location=device))
-model.eval()
-
-# Prompt
+# Prompt input
 prompt_text = input("Enter prompt: ")
+
 prompt = torch.tensor(
     bytearray(prompt_text, "utf-8"),
     dtype=torch.long,
     device=device
 ).unsqueeze(0)
 
-# Generate
-with torch.no_grad():
-    output = model.generate(prompt, max_new_tokens=200, top_k=3)
+# Helper function for loading model & generating text
+def generate_from_checkpoint(weight_path, label):
+    print("\n" + "=" * 60)
+    print(f"🔹 Output at {label} Training")
+    print("=" * 60)
 
-# Decode
-generated_text = bytes(
-    output.squeeze(0).cpu().numpy().astype("uint8")
-).decode(errors="ignore")
+    model = bdh.BDH(config).to(device)
+    model.load_state_dict(torch.load(weight_path, map_location=device))
+    model.eval()
 
-print("\nGenerated Text:\n")
-print(generated_text)
+    with torch.no_grad():
+        output = model.generate(prompt, max_new_tokens=200, top_k=1)
+
+    generated_text = bytes(
+        output.squeeze(0).cpu().numpy().astype("uint8")
+    ).decode(errors="ignore")
+
+    print(generated_text)
+    print("=" * 60)
+
+
+# Generate outputs at different training stages
+generate_from_checkpoint("bdh_weights_25.pt", "25%")
+generate_from_checkpoint("bdh_weights_50.pt", "50%")
+generate_from_checkpoint("bdh_weights_100.pt", "100%")
