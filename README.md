@@ -39,7 +39,7 @@ BDH/
 ├── input.txt         # Training dataset (Tiny Shakespeare)
 ├── requirements.txt  # Python dependencies
 ├── README.md         # Project documentation
-
+```
 ## Output 
 <img width="1436" height="211" alt="image" src="https://github.com/user-attachments/assets/f50913bd-aa65-48e0-acd1-25b3fc589748" />
 
