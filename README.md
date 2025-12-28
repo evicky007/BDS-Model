@@ -27,16 +27,16 @@ This project demonstrates how alternative architectures can model language **wit
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 BDH/
-├── train.py # Model training script
-├── infer.py # Inference (text generation)
-├── bdh.py # BDH model architecture
-├── input.txt # Training data (Tiny Shakespeare)
-├── requirements.txt # Dependencies
-├── README.md # Project documentation
+├── train.py          # Script for training the BDH language model
+├── infer.py          # Script for text generation (inference)
+├── bdh.py            # Core BDH (post-Transformer) model architecture
+├── input.txt         # Training dataset (Tiny Shakespeare text)
+├── requirements.txt  # Python dependencies
+├── README.md         # Project documentation
 
-
+## output 
 <img width="1004" height="290" alt="image" src="https://github.com/user-attachments/assets/e14b5bcf-4025-4014-8655-1d693f121bf4" />
 
